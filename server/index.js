@@ -24,7 +24,7 @@ const ONE_DAY =  1000 * 60 * 60 * 24;
 app.use(sessions({
   secret: process.env.SECRET,
   saveUninitialized: true,
-  cookie: { maxAge: ONE_DAY, sameSite: process.env.NODE_ENV === 'development' ? false : true, secure: process.env.NODE_ENV === 'development' ? false : true, httpOnly: true },
+  cookie: { maxAge: ONE_DAY, sameSite: process.env.NODE_ENV === 'development' ? 'lax' : 'none', secure: process.env.NODE_ENV === 'development' ? false : true, httpOnly: true },
   resave: false
 }));
 
