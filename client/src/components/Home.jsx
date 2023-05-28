@@ -1,12 +1,14 @@
 import React from 'react';
 import { useUserData } from '../context/UserContext';
+import dotenv from 'dotenv';
+dotenv.config();
 
 function Home() {
 
   const { userData } = useUserData();
 
   const handleLogout = async (e) => {
-    await fetch('api/users/logout', {
+    await fetch(`${process.env.SERVER_URL}/api/users/logout`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

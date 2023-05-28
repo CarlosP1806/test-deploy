@@ -1,5 +1,7 @@
 import React from 'react';
 import { useEffect, useState, useContext } from "react";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const UserDataContext = React.createContext();
 
@@ -13,7 +15,7 @@ export function UserDataProvider({ children }) {
 
   const getUserData = async () => {
     try { 
-      const checkAuth = await fetch('/api/users/check');
+      const checkAuth = await fetch(`${process.env.SERVER_URL}/api/users/check`);
       const { isAuthenticated } = await checkAuth.json();
 
       if(!isAuthenticated) {
@@ -22,7 +24,7 @@ export function UserDataProvider({ children }) {
       }
 
       setLoadingUser(true);
-      const response = await fetch('/api/users/me');
+      const response = await fetch(`${process.env.SERVER_URL}/api/users/me`);
       const currentUser = await response.json();
 
       setUserData(currentUser);

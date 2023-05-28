@@ -1,6 +1,9 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 function Login() {
 
@@ -22,7 +25,7 @@ function Login() {
     event.preventDefault();
 
     try {
-      let response = await fetch('/api/users/login', {
+      let response = await fetch(`${process.env.SERVER_URL}/api/users/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
