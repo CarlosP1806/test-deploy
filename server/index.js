@@ -12,20 +12,21 @@ const PORT = process.env.PORT || 3001;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.set('trust proxy', 1);
 app.use(cors({
-  origin: "*",
-  credentials: true
+  origin: process.env.CLIENT_URL,
+  credentials: true,
 }));
+app.use(cookieParser());
 
 // Setup session
 const ONE_DAY =  1000 * 60 * 60 * 24;
 app.use(sessions({
   secret: process.env.SECRET,
   saveUninitialized: true,
-  cookie: { maxAge: ONE_DAY },
+  cookie: { maxAge: ONE_DAY, sameSite: process.env.NODE_ENV === 'development' ? false : true, secure: process.env.NODE_ENV === 'development' ? false : true, httpOnly: true },
   resave: false
 }));
-app.use(cookieParser());
 
 app.use(routes);
 

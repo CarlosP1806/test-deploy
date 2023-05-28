@@ -22,8 +22,9 @@ function Login() {
     event.preventDefault();
 
     try {
-      let response = await fetch(`/api/users/login`, {
+      let response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users/login`, {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json'
         },

@@ -13,7 +13,10 @@ export function UserDataProvider({ children }) {
 
   const getUserData = async () => {
     try { 
-      const checkAuth = await fetch(`/api/users/check`);
+      const checkAuth = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users/check`, {
+        method: 'GET',
+        credentials: 'include'
+      });
       const { isAuthenticated } = await checkAuth.json();
 
       if(!isAuthenticated) {
@@ -22,7 +25,10 @@ export function UserDataProvider({ children }) {
       }
 
       setLoadingUser(true);
-      const response = await fetch(`/api/users/me`);
+      const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users/me`, {
+        method: 'GET',
+        credentials: 'include',
+      });
       const currentUser = await response.json();
 
       setUserData(currentUser);
