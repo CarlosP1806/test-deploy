@@ -6,7 +6,7 @@ function Home() {
   const { userData } = useUserData();
 
   const handleLogout = async (e) => {
-    await fetch(`${import.meta.env.VITE_SERVER_URL}/api/users/logout`, {
+    await fetch(`/api/users/logout`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
